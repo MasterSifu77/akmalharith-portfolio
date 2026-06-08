@@ -274,10 +274,11 @@
 
   <div class="projects-grid">
 
-    <div class="project-card reveal-delay-1">
+    <div class="project-card reveal-delay-1" data-project="aircraft">
       <img src="Images/project_iot.png" alt="Aircraft Data Tracking System" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">March 2026</span>
         <h3>Real-Time Aircraft Data Tracking System</h3>
         <p>
           Developed a real-time aircraft data tracking system using the OpenSky Network API.
@@ -293,10 +294,11 @@
       </div>
     </div>
 
-    <div class="project-card reveal-delay-2">
+    <div class="project-card reveal-delay-2" data-project="twitter">
       <img src="Images/project_figma.jpg" alt="Twitter-X Interface Redesign Project" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">November 2025</span>
         <h3>Twitter-X Interface Redesign Project</h3>
         <p>
           Redesigned the Twitter/X interface to improve usability, clarity, and overall user
@@ -312,10 +314,11 @@
       </div>
     </div>
 
-    <div class="project-card reveal-delay-3">
+    <div class="project-card reveal-delay-3" data-project="library">
       <img src="Images/project_library.png" alt="Library Management System Website" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">March 2025</span>
         <h3>Library Management System Website</h3>
         <p>
           Developed a web-based library management system that allows users to browse and
@@ -331,10 +334,11 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-project="petclinic">
       <img src="Images/project_petclinic.jpg" alt="Pet Clinic Appointment Management System" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">March 2025</span>
         <h3>Pet Clinic Appointment Management System</h3>
         <p>
           Developed a pet clinic appointment system to support account registration,
@@ -350,10 +354,11 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-project="database">
       <img src="Images/project_database.png" alt="Student Attendance Database System" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">November 2024</span>
         <h3>Student Attendance Database System</h3>
         <p>
           Designed a database system to manage student attendance records, including
@@ -369,10 +374,11 @@
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" data-project="leaflink">
       <img src="Images/project_leaflink.png" alt="LeafLink Farmer Social Media Application" class="project-img">
 
       <div class="project-content">
+        <span class="project-date">July 2024</span>
         <h3>LeafLink Farmer Social Media Application</h3>
         <p>
           Led a team project to develop a social media application for farmers, allowing
@@ -660,6 +666,54 @@
     </form>
   </div>
 </section>
+
+<!-- Project Detail Modal -->
+<div class="project-modal" id="projectModal">
+  <div class="project-modal-overlay" id="projectModalOverlay"></div>
+
+  <div class="project-modal-box">
+    <button class="project-modal-close" id="projectModalClose" aria-label="Close project modal">×</button>
+
+    <div class="project-modal-layout">
+      <div class="project-modal-image-wrap">
+        <img id="modalProjectImage" class="project-modal-image" src="" alt="">
+        <p class="project-image-hint">Click image to enlarge</p>
+      </div>
+
+      <div class="project-modal-main">
+        <div class="project-modal-header">
+          <span class="project-modal-date" id="modalProjectDate"></span>
+          <h2 id="modalProjectTitle"></h2>
+          <p id="modalProjectShort"></p>
+        </div>
+
+        <div class="project-modal-content">
+          <div class="project-modal-section">
+            <h3>Project Overview</h3>
+            <p id="modalProjectOverview"></p>
+          </div>
+
+          <div class="project-modal-section">
+            <h3>What I Worked On</h3>
+            <ul id="modalProjectTasks"></ul>
+          </div>
+
+          <div class="project-modal-section">
+            <h3>Skills & Tools Used</h3>
+            <div class="modal-skill-icons" id="modalProjectSkills"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Image Preview -->
+<div class="project-image-preview" id="projectImagePreview">
+  <div class="project-image-preview-overlay" id="projectImagePreviewOverlay"></div>
+  <button class="project-image-preview-close" id="projectImagePreviewClose" aria-label="Close image preview">×</button>
+  <img id="projectImagePreviewImg" src="" alt="">
+</div>
 
 <!-- AkmalBot Floating Assistant -->
 <div class="akmalbot-widget" id="akmalBot">

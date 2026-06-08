@@ -265,6 +265,269 @@ window.addEventListener("scroll", () => {
   });
 });
 
+// PROJECT MODAL
+const projectData = {
+  aircraft: {
+    image: "Images/project_iot.png",
+    date: "March 2026",
+    title: "Real-Time Aircraft Data Tracking System",
+    short:
+      "A data-focused system that retrieves and displays real-time aircraft information using the OpenSky API.",
+    overview:
+      "This project focuses on real-time aircraft data retrieval and analysis. It uses API-based data to display aircraft information in a structured way, helping demonstrate data handling, API integration, and technical problem-solving skills.",
+    tasks: [
+      "Retrieved aircraft data using the OpenSky API.",
+      "Processed real-time aviation data into a readable structure.",
+      "Worked with Python to handle data fetching and basic analysis.",
+      "Improved understanding of API integration and real-time data flow."
+    ],
+    skills: [
+      { name: "Python", icon: null },
+      { name: "VS Code", icon: "Images/logo_vscode.png" }
+    ]
+  },
+
+  twitter: {
+    image: "Images/project_figma.jpg",
+    date: "November 2025",
+    title: "Twitter-X Interface Redesign Project",
+    short:
+      "A user interface redesign project focused on improving layout, usability, and visual consistency.",
+    overview:
+      "This project involved redesigning the Twitter-X interface with attention to usability, user flow, and interface clarity. The goal was to improve the user experience while keeping the design clean and familiar.",
+    tasks: [
+      "Analysed the existing interface and identified areas for improvement.",
+      "Created redesigned layouts and interface screens.",
+      "Focused on user experience, visual hierarchy, and consistency.",
+      "Used Figma to plan and present the interface redesign."
+    ],
+    skills: [
+      { name: "Figma", icon: "Images/logo_figma.png" },
+      { name: "Canva", icon: "Images/logo_canva.png" }
+    ]
+  },
+
+  library: {
+    image: "Images/project_library.png",
+    date: "March 2025",
+    title: "Library Management System Website",
+    short:
+      "A web-based library system designed to manage book records and basic user interactions.",
+    overview:
+      "This project focused on developing a simple library management website that helps organise book-related information. It strengthened web development fundamentals including page structure, styling, and front-end interaction.",
+    tasks: [
+      "Designed and developed the website interface.",
+      "Created pages for managing library-related information.",
+      "Applied HTML, CSS, and JavaScript for structure, styling, and interaction.",
+      "Hosted and tested the project using a web hosting platform."
+    ],
+    skills: [
+      { name: "HTML", icon: null },
+      { name: "CSS", icon: null },
+      { name: "JavaScript", icon: null },
+      { name: "VS Code", icon: "Images/logo_vscode.png" }
+    ]
+  },
+
+  petclinic: {
+    image: "Images/project_petclinic.jpg",
+    date: "March 2025",
+    title: "Pet Clinic Appointment Management System",
+    short:
+      "A system concept for managing pet clinic appointments and customer-related records.",
+    overview:
+      "This project was designed to support appointment management for a pet clinic. It focuses on organising bookings and improving the structure of clinic-related information.",
+    tasks: [
+      "Designed the system structure for managing appointments.",
+      "Created user-friendly screens for appointment-related information.",
+      "Applied web development concepts to organise the interface.",
+      "Improved understanding of simple management systems."
+    ],
+    skills: [
+      { name: "C#", icon: null },
+      { name: "HTML", icon: null },
+      { name: "CSS", icon: null },
+      { name: "JavaScript", icon: null },
+      { name: "VS Code", icon: "Images/logo_vscode.png" }
+    ]
+  },
+
+  database: {
+    image: "Images/project_database.png",
+    date: "November 2024",
+    title: "Student Attendance Database System",
+    short:
+      "A database system designed to organise and manage student attendance records.",
+    overview:
+      "This project focused on database design and structured data management. It was created to record, organise, and manage student attendance information more efficiently.",
+    tasks: [
+      "Designed database tables for student and attendance records.",
+      "Organised information into a structured database format.",
+      "Used SQL concepts to manage and retrieve stored data.",
+      "Improved understanding of database relationships and data organisation."
+    ],
+    skills: [
+      { name: "SQL", icon: null },
+      { name: "Database", icon: null },
+      { name: "VS Code", icon: "Images/logo_vscode.png" }
+    ]
+  },
+
+  leaflink: {
+    image: "Images/project_leaflink.png",
+    date: "July 2024",
+    title: "LeafLink Farmer Social Media Application",
+    short:
+      "A farmer-focused social media application concept developed during Oh My Code.",
+    overview:
+      "LeafLink is a social media application concept designed for farmers to connect, share updates, and support agriculture-related communication. The project was developed as part of Oh My Code and encouraged teamwork, creativity, and application development.",
+    tasks: [
+      "Contributed to the application concept and feature planning.",
+      "Helped develop the application using VB.NET.",
+      "Worked with teammates to create a functional prototype.",
+      "Strengthened teamwork, problem-solving, and presentation skills."
+    ],
+    skills: [
+      { name: "VB.NET", icon: null },
+      { name: "Visual Studio", icon: "Images/logo_visualstudio.png" }
+    ]
+  }
+};
+
+const projectCards = document.querySelectorAll(".project-card");
+const projectModal = document.getElementById("projectModal");
+const projectModalOverlay = document.getElementById("projectModalOverlay");
+const projectModalClose = document.getElementById("projectModalClose");
+
+const modalProjectDate = document.getElementById("modalProjectDate");
+const modalProjectTitle = document.getElementById("modalProjectTitle");
+const modalProjectShort = document.getElementById("modalProjectShort");
+const modalProjectOverview = document.getElementById("modalProjectOverview");
+const modalProjectTasks = document.getElementById("modalProjectTasks");
+const modalProjectSkills = document.getElementById("modalProjectSkills");
+const modalProjectImage = document.getElementById("modalProjectImage");
+
+function createSkillItem(skill) {
+  const skillItem = document.createElement("div");
+  skillItem.classList.add("modal-skill-item");
+
+  if (skill.icon) {
+    const img = document.createElement("img");
+    img.src = skill.icon;
+    img.alt = skill.name;
+    skillItem.appendChild(img);
+  } else {
+    const fallback = document.createElement("div");
+    fallback.textContent = skill.name.charAt(0);
+    fallback.style.width = "34px";
+    fallback.style.height = "34px";
+    fallback.style.borderRadius = "10px";
+    fallback.style.display = "grid";
+    fallback.style.placeItems = "center";
+    fallback.style.background = "rgba(96, 165, 250, 0.2)";
+    fallback.style.color = "#93c5fd";
+    fallback.style.fontWeight = "900";
+    skillItem.appendChild(fallback);
+  }
+
+  const label = document.createElement("span");
+  label.textContent = skill.name;
+  skillItem.appendChild(label);
+
+  return skillItem;
+}
+
+function openProjectModal(projectKey) {
+  const project = projectData[projectKey];
+
+  if (!project || !projectModal) {
+    return;
+  }
+
+    if (modalProjectImage) {
+    modalProjectImage.src = project.image;
+    modalProjectImage.alt = project.title;
+  }
+
+  modalProjectDate.textContent = project.date;
+  modalProjectTitle.textContent = project.title;
+  modalProjectShort.textContent = project.short;
+  modalProjectOverview.textContent = project.overview;
+
+  modalProjectTasks.innerHTML = "";
+  project.tasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.textContent = task;
+    modalProjectTasks.appendChild(li);
+  });
+
+  modalProjectSkills.innerHTML = "";
+  project.skills.forEach((skill) => {
+    modalProjectSkills.appendChild(createSkillItem(skill));
+  });
+
+  projectModal.classList.add("open");
+  document.body.classList.add("modal-open");
+}
+
+function closeProjectModal() {
+  if (!projectModal) return;
+  projectModal.classList.remove("open");
+  document.body.classList.remove("modal-open");
+}
+
+projectCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const projectKey = card.getAttribute("data-project");
+    openProjectModal(projectKey);
+  });
+});
+
+if (projectModalOverlay) {
+  projectModalOverlay.addEventListener("click", closeProjectModal);
+}
+
+if (projectModalClose) {
+  projectModalClose.addEventListener("click", closeProjectModal);
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeProjectImagePreview();
+    closeProjectModal();
+  }
+});
+
+// PROJECT IMAGE FULL PREVIEW
+const projectImagePreview = document.getElementById("projectImagePreview");
+const projectImagePreviewImg = document.getElementById("projectImagePreviewImg");
+const projectImagePreviewOverlay = document.getElementById("projectImagePreviewOverlay");
+const projectImagePreviewClose = document.getElementById("projectImagePreviewClose");
+
+if (modalProjectImage && projectImagePreview && projectImagePreviewImg) {
+  modalProjectImage.addEventListener("click", () => {
+    if (!modalProjectImage.src) return;
+
+    projectImagePreviewImg.src = modalProjectImage.src;
+    projectImagePreviewImg.alt = modalProjectImage.alt;
+
+    projectImagePreview.classList.add("open");
+  });
+}
+
+function closeProjectImagePreview() {
+  if (!projectImagePreview) return;
+  projectImagePreview.classList.remove("open");
+}
+
+if (projectImagePreviewOverlay) {
+  projectImagePreviewOverlay.addEventListener("click", closeProjectImagePreview);
+}
+
+if (projectImagePreviewClose) {
+  projectImagePreviewClose.addEventListener("click", closeProjectImagePreview);
+}
+
 // AKMALBOT PHASE 1 - RANDOM SPEECH BUBBLES
 const akmalBotBubble = document.getElementById("akmalBotBubble");
 
@@ -312,10 +575,20 @@ if (akmalBotButton && akmalBotChatbox && akmalBotClose && akmalBotWidget) {
     akmalBotWidget.classList.toggle("chat-open");
   });
 
-  akmalBotClose.addEventListener("click", () => {
-    akmalBotChatbox.classList.remove("open");
-    akmalBotWidget.classList.remove("chat-open");
-  });
+  akmalBotButton.addEventListener("click", () => {
+  if (spyderWasHeld) {
+    spyderWasHeld = false;
+    return;
+  }
+
+  if (akmalBotWidget.classList.contains("spyder-disabled")) {
+    akmalBotWidget.classList.remove("spyder-disabled");
+    return;
+  }
+
+  akmalBotChatbox.classList.toggle("open");
+  akmalBotWidget.classList.toggle("chat-open");
+});
 }
 
 // AKMALBOT PHASE 3 - SEND USER MESSAGES
@@ -510,4 +783,34 @@ if (
   }
 
   return "I’m not fully sure about that yet, but you can ask me about Akmal’s projects, skills, education, resume, internship, activities, creative media, or contact details.";
+}
+
+// SPYDER HOLD TO DISABLE / ENABLE
+let spyderHoldTimer;
+let spyderWasHeld = false;
+
+if (akmalBotButton && akmalBotWidget && akmalBotChatbox) {
+  function startSpyderHold() {
+    spyderWasHeld = false;
+
+    spyderHoldTimer = setTimeout(() => {
+      spyderWasHeld = true;
+
+      akmalBotWidget.classList.toggle("spyder-disabled");
+
+      akmalBotChatbox.classList.remove("open");
+      akmalBotWidget.classList.remove("chat-open");
+    }, 900);
+  }
+
+  function cancelSpyderHold() {
+    clearTimeout(spyderHoldTimer);
+  }
+
+  akmalBotButton.addEventListener("mousedown", startSpyderHold);
+  akmalBotButton.addEventListener("mouseup", cancelSpyderHold);
+  akmalBotButton.addEventListener("mouseleave", cancelSpyderHold);
+
+  akmalBotButton.addEventListener("touchstart", startSpyderHold);
+  akmalBotButton.addEventListener("touchend", cancelSpyderHold);
 }
