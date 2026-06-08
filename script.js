@@ -264,3 +264,250 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+// AKMALBOT PHASE 1 - RANDOM SPEECH BUBBLES
+const akmalBotBubble = document.getElementById("akmalBotBubble");
+
+const akmalBotMessages = [
+  "Need help exploring the site?",
+  "Psst... check out the Projects section 👀",
+  "Akmal is looking for an internship from September 2026 to April 2027.",
+  "Want to know his skills? The Skills section has the good stuff.",
+  "The Aircraft Data Tracking project is worth checking out.",
+  "You can download the resume from the Overview section.",
+  "Creative Media has some edited videos too 🎬",
+  "Looking for contact details? Scroll to the Contact section."
+];
+
+let akmalBotMessageIndex = 0;
+
+function changeAkmalBotMessage() {
+  if (!akmalBotBubble) return;
+
+  akmalBotBubble.style.opacity = "0";
+  akmalBotBubble.style.transform = "translateY(8px)";
+
+  setTimeout(() => {
+    akmalBotMessageIndex =
+      (akmalBotMessageIndex + 1) % akmalBotMessages.length;
+
+    akmalBotBubble.textContent = akmalBotMessages[akmalBotMessageIndex];
+
+    akmalBotBubble.style.opacity = "1";
+    akmalBotBubble.style.transform = "translateY(0)";
+  }, 300);
+}
+
+setInterval(changeAkmalBotMessage, 5000);
+
+// AKMALBOT PHASE 2 - OPEN AND CLOSE CHATBOX
+const akmalBotWidget = document.getElementById("akmalBot");
+const akmalBotButton = document.getElementById("akmalBotButton");
+const akmalBotChatbox = document.getElementById("akmalBotChatbox");
+const akmalBotClose = document.getElementById("akmalBotClose");
+
+if (akmalBotButton && akmalBotChatbox && akmalBotClose && akmalBotWidget) {
+  akmalBotButton.addEventListener("click", () => {
+    akmalBotChatbox.classList.toggle("open");
+    akmalBotWidget.classList.toggle("chat-open");
+  });
+
+  akmalBotClose.addEventListener("click", () => {
+    akmalBotChatbox.classList.remove("open");
+    akmalBotWidget.classList.remove("chat-open");
+  });
+}
+
+// AKMALBOT PHASE 3 - SEND USER MESSAGES
+const akmalBotForm = document.getElementById("akmalBotForm");
+const akmalBotInput = document.getElementById("akmalBotInput");
+const akmalBotChatBody = document.querySelector(".akmalbot-chat-body");
+
+function addAkmalBotMessage(message, sender) {
+  if (!akmalBotChatBody) return;
+
+  const messageDiv = document.createElement("div");
+  messageDiv.classList.add("akmalbot-message");
+
+  if (sender === "user") {
+    messageDiv.classList.add("user-message");
+  } else {
+    messageDiv.classList.add("bot-message");
+  }
+
+  messageDiv.textContent = message;
+  akmalBotChatBody.appendChild(messageDiv);
+
+  akmalBotChatBody.scrollTop = akmalBotChatBody.scrollHeight;
+}
+
+if (akmalBotForm && akmalBotInput) {
+  akmalBotForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const userMessage = akmalBotInput.value.trim();
+
+    if (userMessage === "") return;
+
+    addAkmalBotMessage(userMessage, "user");
+
+    akmalBotInput.value = "";
+
+    const botReply = getAkmalBotReply(userMessage);
+
+    setTimeout(() => {
+      addAkmalBotMessage(botReply, "bot");
+    }, 500);
+  });
+}
+
+// AKMALBOT PHASE 4 - SMART KEYWORD REPLIES
+function getAkmalBotReply(userMessage) {
+  const message = userMessage.toLowerCase();
+
+  const hasWord = (word) => {
+  return new RegExp("\\b" + word + "\\b").test(message);
+};
+
+if (
+  hasWord("hello") ||
+  hasWord("yo") ||
+  hasWord("hey") ||
+  hasWord("hi") 
+) {
+  return "Hi there! I’m Spyder. You can ask me about Akmal’s projects, skills, education, resume, internship, activities, creative media, or contact details.";
+}
+
+if (
+    message.includes("best project") ||
+    message.includes("strongest project") ||
+    message.includes("recommend")
+  ) {
+    return "I recommend checking out the Real-Time Aircraft Data Tracking System. It shows Akmal’s ability to work with APIs, Python, real-time data, and data handling.";
+  }
+
+  if (
+    message.includes("project") ||
+    message.includes("projects") ||
+    message.includes("portfolio")
+  ) {
+    return "Akmal has worked on several projects including a Real-Time Aircraft Data Tracking System, Library Management System Website, Pet Clinic Appointment Management System, Student Attendance Database System, Twitter-X Interface Redesign, and LeafLink, a farmer social media application.";
+  }
+
+  if (
+    message.includes("aircraft") ||
+    message.includes("flight") ||
+    message.includes("opensky") ||
+    message.includes("tracking")
+  ) {
+    return "The Real-Time Aircraft Data Tracking System uses the OpenSky API to retrieve aircraft data and display real-time flight information. It is one of Akmal’s strongest data-related projects.";
+  }
+
+  if (
+    message.includes("skill") ||
+    message.includes("skills") ||
+    message.includes("technical")
+  ) {
+    return "Akmal’s technical skills include Python, VB.NET, C++, C#, HTML, CSS, JavaScript, Lua, R Language, and SQL. He also uses tools such as VS Code, Visual Studio, PyCharm, R Studio, eNSP, Wireshark, Figma, Canva, CapCut, and DaVinci Resolve.";
+  }
+
+  if (
+    message.includes("programming") ||
+    message.includes("language") ||
+    message.includes("coding")
+  ) {
+    return "Akmal has experience with Python, VB.NET, C++, C#, HTML, CSS, JavaScript, Lua, R Language, and SQL.";
+  }
+
+  if (
+    message.includes("education") ||
+    message.includes("study") ||
+    message.includes("university") ||
+    message.includes("utp")
+  ) {
+    return "Akmal is currently pursuing a Bachelor of Information Technology at Universiti Teknologi PETRONAS. He also completed his Foundation in Information Technology at UTP.";
+  }
+
+  if (
+    message.includes("internship") ||
+    message.includes("intern") ||
+    message.includes("placement")
+  ) {
+    return "Yes, Akmal is seeking an 8-month internship from September 2026 to April 2027, especially in IT-related areas such as software development, data, systems, or technology roles.";
+  }
+
+  if (
+    message.includes("resume") ||
+    message.includes("cv")
+  ) {
+    return "You can download Akmal’s resume from the Overview section near the top of the website.";
+  }
+
+  if (
+    message.includes("contact") ||
+    message.includes("email") ||
+    message.includes("reach")
+  ) {
+    return "You can contact Akmal through the Contact section at the bottom of the website, or via his UTP email: muhammad_22010886@utp.edu.my.";
+  }
+
+  if (
+    message.includes("linkedin")
+  ) {
+    return "Akmal’s LinkedIn profile is linked in the Overview section. You can click the LinkedIn button to visit it directly.";
+  }
+
+  if (
+    message.includes("creative") ||
+    message.includes("media") ||
+    message.includes("video") ||
+    message.includes("editing")
+  ) {
+    return "The Creative Media section showcases Akmal’s edited videos, including Celestial Night Run 2026, The Small Wins PSA, and Sportech 2025. The videos were edited using DaVinci Resolve.";
+  }
+
+  if (
+    message.includes("activity") ||
+    message.includes("activities") ||
+    message.includes("event") ||
+    message.includes("extracurricular") ||
+    message.includes("extra-curricular")
+  ) {
+    return "Akmal has been involved in events such as Suarana: STEM Discovery, Celestial Delights 2026, Celestial Night Run 2026, Pathway to Mossy Heaven, Mobile Legends UTP League Tournament, Sportech 2025, and Gladiators Paintball Arena 2025.";
+  }
+
+  if (
+    message.includes("data") ||
+    message.includes("database") ||
+    message.includes("sql")
+  ) {
+    return "For data-related work, Akmal’s Aircraft Data Tracking System and Student Attendance Database System are worth checking out. They show experience with data handling, databases, and structured systems.";
+  }
+
+  if (
+    message.includes("website") ||
+    message.includes("web") ||
+    message.includes("html") ||
+    message.includes("css") ||
+    message.includes("javascript")
+  ) {
+    return "Akmal has web development experience through projects such as the Library Management System Website, Pet Clinic Appointment Management System, and this personal portfolio website.";
+  }
+
+  if (
+    message.includes("who are you") ||
+    message.includes("what are you") ||
+    message.includes("spyder")
+  ) {
+    return "I’m Spyder, a small portfolio assistant built to help visitors explore Akmal’s website more easily.";
+  }
+
+  if (
+    message.includes("thank") ||
+    message.includes("thanks")
+  ) {
+    return "You’re welcome! Feel free to ask me anything else about Akmal’s portfolio.";
+  }
+
+  return "I’m not fully sure about that yet, but you can ask me about Akmal’s projects, skills, education, resume, internship, activities, creative media, or contact details.";
+}
